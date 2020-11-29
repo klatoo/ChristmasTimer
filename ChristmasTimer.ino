@@ -33,7 +33,7 @@ void setup()
      // Enable periodic interrupt (possible values are: DS3231::Periodicity::EverySecond, EveryMinute, EveryHour)
      rtc.enableInterrupts(DS3231::Periodicity::EveryMinute); 
 	 
-	 timerClock.setup(17,0,0,23,58,0); // switching on at 17:00:00 and off at 23:58:00
+	 timerClock.setup(17,00,0,23,45,0); // switching on at 17:00:00 and off at 23:58:00
 	 staticIo.Init(3,false);
 }
 
@@ -57,20 +57,23 @@ void loop()
 	Serial.print(':');
 	Serial.println(now.second(), DEC);
 			
-	Serial.print("unix-time: "); 
-	Serial.println(now.unixtime());
-  Serial.println();
+	// Serial.print("unix-time: "); 
+	// Serial.println(now.unixtime());
+  // Serial.println();
   
  
 	if(timerClock.IsOn(now))
 	{
 	   staticIo.On(); 
+     Serial.println('on');
 	}
     else
 	{
 	   staticIo.Off(); 
+    Serial.println('off');
 	}
-
+ 
+  Serial.println();
   
 
    rtc.clearINTStatus();
