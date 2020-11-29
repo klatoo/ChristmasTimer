@@ -7,13 +7,13 @@
 
 #include "RtcLibHelper.h"
 #include "DS3231.h"
-#include "Relais.h"
+#include "StaticIo.h"
 
 TimerClock24h timerClock;
-Relais relais;
+StaticIo staticIo;
 
 
-void setup () 
+void setup() 
 {
      // Initialize INT0 for accepting interrupts, check if pin is available on your board 
      PORTD |= 0x04; 
@@ -32,12 +32,12 @@ void setup ()
      // Enable periodic interrupt (possible values are: DS3231::Periodicity::EverySecond, EveryMinute, EveryHour)
      rtc.enableInterrupts(DS3231::Periodicity::EveryMinute); 
 	 
-	 timerClock.setup(17,45,0,23,58,0); // switching on at 17:45:00 and off at 23:58:00
-	 relais.setup(3);
+	 timerClock.setup(17,0,0,23,58,0); // switching on at 17:00:00 and off at 23:58:00
+	 staticIo.Init(3,false);
 }
 
 
-void loop () 
+void loop() 
 {
   DateTime now = rtc.now();   // get the current date-time
 
@@ -63,11 +63,11 @@ void loop ()
  
 	if(timerClock.IsOn(now))
 	{
-	   relais.Off(); // On(); // changed for MOSFET
+	   staticIo.On(); 
 	}
     else
 	{
-	   relais.On(); // Off(); // changede for MOSFET
+	   staticIo.Off(); 
 	}
 
   
