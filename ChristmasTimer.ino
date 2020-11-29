@@ -1,13 +1,14 @@
 // ChristmasTimer.ino
-// last edit 28.Dec.2016  /klatoo  - created
+// last edit 28.Dec.2016 /klatoo -created
+//           29.Nov.2020 /klatoo  changed to use StaticIo, changed time
 //
 // application that uses the RtcLib to switch the LEDs of a Christmas tree on 
 // at a certain time
 // 
 
-#include "RtcLibHelper.h"
-#include "DS3231.h"
-#include "StaticIo.h"
+#include <RtcLibHelper.h>
+#include <DS3231.h>
+#include <StaticIo.h>
 
 TimerClock24h timerClock;
 StaticIo staticIo;
